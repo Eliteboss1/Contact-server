@@ -6,7 +6,7 @@ require("dotenv").config();
 const app = express();
 app.use(
   cors({
-    origin: ["http://seedgate.co", "https://seedgate.co"],
+    origin: ["https://seedgate.co", "https://www.seedgate.co"],
   })
 );
 app.use(express.json());
