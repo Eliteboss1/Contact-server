@@ -6,7 +6,7 @@ require("dotenv").config();
 const app = express();
 app.use(
   cors({
-    origin: ["https://seedgate.co", "https://www.seedgate.co"],
+    origin: ["http://127.0.0.1:5500"],
   })
 );
 app.use(express.json());
@@ -15,7 +15,7 @@ app.post("/send-mail", async (req, res) => {
   try {
     const { html, email } = req.body;
     const transporter = nodemailer.createTransport({
-      host: "mail.privateemail.com",
+      host: "smtp.gmail.com",
       port: 465,
       secure: true,
       auth: {
@@ -27,7 +27,7 @@ app.post("/send-mail", async (req, res) => {
     await transporter.sendMail({
       from: process.env.EMAIL,
       to: process.env.EMAIL,
-      subject: "Someone has asked for your consultation",
+      subject: "Rania Insurance",
       html,
       replyTo: email,
     });
