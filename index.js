@@ -26,7 +26,7 @@ app.post("/send-mail", async (req, res) => {
 
     await transporter.sendMail({
       from: process.env.EMAIL,
-      to: process.env.EMAIL,
+      to: "sales@raniainsurance.com",
       subject: "Rania Insurance",
       html,
       replyTo: email,
