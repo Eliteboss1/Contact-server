@@ -9,6 +9,7 @@ app.use(
     origin: [
       "http://127.0.0.1:5500",
       "https://beamish-jalebi-694042.netlify.app",
+      "https://raniainsurance.com",
     ],
   })
 );
