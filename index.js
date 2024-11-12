@@ -2,10 +2,11 @@ const express = require("express");
 const nodemailer = require("nodemailer");
 const cors = require("cors");
 const cron = require("node-cron");
-const fetch = require("node-fetch");
+const { fetch } = require("undici");
 require("dotenv").config();
 
 const app = express();
+
 app.use(
   cors({
     origin: [
@@ -16,6 +17,7 @@ app.use(
     ],
   })
 );
+
 app.use(express.json());
 
 app.options("*", cors());
@@ -53,11 +55,11 @@ app.post("/send-mail", async (req, res) => {
       html,
       replyTo: email,
     });
-    console.log("Email sent successfully");
 
+    console.log("Email sent successfully");
     return res.status(200).json({ message: "Message sent successfully" });
   } catch (error) {
-    console.log("email not sent!", error);
+    console.log("Email not sent!", error);
     return res
       .status(500)
       .json({ message: `An error occurred: ${error.message}` });
