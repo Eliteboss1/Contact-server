@@ -1,6 +1,7 @@
 const express = require("express");
 const nodemailer = require("nodemailer");
 const cors = require("cors");
+const cron = require("node-cron");
 require("dotenv").config();
 
 const app = express();
@@ -14,6 +15,19 @@ app.use(
   })
 );
 app.use(express.json());
+
+app.get("/keep-alive", (req, res) => {
+  res.status(200).send("Server is active");
+});
+
+cron.schedule("*/5 * * * *", async () => {
+  try {
+    await fetch("http://localhost:5000/keep-alive");
+    console.log("Pinged keep-alive endpoint");
+  } catch (error) {
+    console.error("Failed to ping keep-alive endpoint:", error.message);
+  }
+});
 
 app.post("/send-mail", async (req, res) => {
   try {
